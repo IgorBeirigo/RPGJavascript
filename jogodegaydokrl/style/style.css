@@ -1,0 +1,13 @@
+/* style.css */
+body {
+  background-color: #222;
+  color: white;
+  font-family: monospace;
+  padding: 20px;
+}
+
+#dialogoBox, #batalhaBox {
+  background-color: #333;
+  padding: 20px;
+  border-radius: 8px;
+}
