@@ -1,13 +1,40 @@
-/* style.css */
 body {
   background-color: #222;
   color: white;
   font-family: monospace;
-  padding: 20px;
+  margin: 0;
 }
 
-#dialogoBox, #batalhaBox {
+#game {
+  max-width: 800px;
+  margin: auto;
+  background-color: #222;
+  padding: 20px;
+  border-radius: 10px;
+  min-height: 100vh;
+}
+
+#dialogoBox, #batalhaBox, #depoisdabatalhabox {
   background-color: #333;
   padding: 20px;
   border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+#batalhaLog {
+  margin-top: 10px;
+  background-color: #111;
+  padding: 10px;
+  border-radius: 5px;
+  white-space: pre-line;
+}
+
+button {
+  background-color: #555;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 5px;
 }
