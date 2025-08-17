@@ -11,16 +11,81 @@
     <p>Um jogo de RPG que conta a historia do personagem principal onde ele derrota alguns monstros e encontra tesouros no caminho, <br></p>
     <card>veja algumas informações</card>
   </div>
+  <!-- cena -->
+  <div class="scene">
+    <div class = "moon" aria-hidden="true"></div>
+
+    <!--Camadas de colinas para profundidade-->
+    <div class = "layer">
+      <div class = "hill h1"></div>
+      <div class = "trees">
+        <!--Fundo (menores e mais escuro)-->
+        <div class = "tree" style = "--x:10vw; --h:140px; --w:18px; --s:1">
+          <div class = "trunk"></div><div class="canopy"></div><div class="leaf"></div>
+        </div>
+        <div class="tree" style="--x:20vw; --h:150px; --w:18px; --s:1.1;">
+          <div class="trunk"></div><div class="canopy"></div><div class="leaf"></div>
+        </div>
+        <div class="tree" style="--x:32vw; --h:130px; --w:16px; --s:0.95;">
+          <div class="trunk"></div><div class="canopy"></div><div class="leaf"></div>
+        </div>
+        <div class="tree" style="--x:68vw; --h:145px; --w:18px; --s:1.05;">
+          <div class="trunk"></div><div class="canopy"></div><div class="leaf"></div>
+      </div>
+    </div>
+    <div class="layer">
+      <div class="hill h2"></div>
+      <div class="trees">
+        <!-- Meio -->
+        <div class="tree" style="--x:12vw; --h:180px; --w:20px; --s:1.2; --canopy-top:#124634;">
+          <div class="trunk"></div><div class="canopy"></div><div class="leaf"></div>
+        </div>
+        <div class="tree" style="--x:26vw; --h:200px; --w:22px; --s:1.25; --canopy-top:#124634;">
+          <div class="trunk"></div><div class="canopy"></div><div class="leaf"></div>
+        </div>
+        <div class="tree" style="--x:60vw; --h:190px; --w:22px; --s:1.22; --canopy-top:#124634;">
+          <div class="trunk"></div><div class="canopy"></div><div class="leaf"></div>
+        </div>
+        <div class="tree" style="--x:78vw; --h:170px; --w:20px; --s:1.18; --canopy-top:#124634;">
+          <div class="trunk"></div><div class="canopy"></div><div class="leaf"></div>
+        </div>
+      </div>
+    </div>
+     <div class="layer">
+      <div class="hill h3"></div>
+      <div class="trees">
+        <!-- Frente (maiores, mais claras) -->
+        <div class="tree" style="--x:6vw; --h:240px; --w:26px; --s:1.5; --canopy-top:#185743;">
+          <div class="trunk"></div><div class="canopy"></div><div class="leaf"></div>
+        </div>
+        <div class="tree" style="--x:22vw; --h:260px; --w:28px; --s:1.7; --canopy-top:#185743;">
+          <div class="trunk"></div><div class="canopy"></div><div class="leaf"></div>
+        </div>
+        <div class="tree" style="--x:48vw; --h:250px; --w:26px; --s:1.6; --canopy-top:#185743;">
+          <div class="trunk"></div><div class="canopy"></div><div class="leaf"></div>
+        </div>
+        <div class="tree" style="--x:72vw; --h:270px; --w:30px; --s:1.75; --canopy-top:#185743;">
+          <div class="trunk"></div><div class="canopy"></div><div class="leaf"></div>
+        </div>
+      </div>
+      
+    </div>
+     <!-- Vaga-lumes (posições manuais para demo) -->
+    <div class="firefly" style="top:40vh; left:30vw;"></div>
+    <div class="firefly" style="top:48vh; left:42vw; animation-delay:.4s"></div>
+    <div class="firefly" style="top:52vh; left:58vw; animation-delay:1s"></div>
+    <div class="firefly" style="top:44vh; left:72vw; animation-delay:1.6s"></div>
+
+    <div class="mist" aria-hidden="true"></div>
+
+
+    </div>
+
+  </div>
   <div id="game">
     <h1>RPG TESTE</h1>
   <div class="personagem goblin"></div>
  
-
-
-
-    
-    
-    <!-- Diálogo inicial -->
     <div id="dialogoBox"></div>
 
     <!-- Caixa pós-batalha -->

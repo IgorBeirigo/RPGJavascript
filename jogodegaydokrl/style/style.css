@@ -1,5 +1,5 @@
 body {
-  background-color: #222;
+  background-color: rgb(34, 34, 34);
   color: white;
   font-family: monospace;
   margin: 0;
@@ -50,3 +50,113 @@ button {
   border-radius: 5px;
   margin-top: 10px;
   font-size: 14px;}
+   /*====================
+      Design tokens
+    ====================*/
+    :root{
+      --sky-top: #0a0f2e;
+      --sky-mid: #13224f;
+      --sky-bottom: #1e3a5f;
+      --mist: #bcd6ff20; /* 12% opacity */
+      --moon: #f4f7ff;
+      --hill-1: #0d1b2a;
+      --hill-2: #0f2434;
+      --hill-3: #113245;
+      --tree-canopy-1: #0f3a2f;
+      --tree-canopy-2: #0b2e25;
+      --tree-trunk: #3b2f2f;
+      --firefly: #ffd966;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: radial-gradient(120% 100% at 50% 0%, var(--sky-top) 0%, var(--sky-mid) 45%, var(--sky-bottom) 100%);
+      overflow:hidden; /* cena fixa para demo */
+    }
+
+    .scene{
+      position:relative;
+      width:100vw;
+      height:100vh;
+      perspective: 800px; /* dá leve sensação de profundidade */
+      isolation:isolate; /* separar blend modes se usar */
+    }
+
+    /* Lua */
+    .moon{
+      position:absolute; top:6vh; left:8vw; width:90px; height:90px; border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, var(--moon), #dfe9ff 40%, #c2cff9 60%, #9fb1ec 75%, transparent 76%);
+      box-shadow: 0 0 60px 10px #c2cff955, 0 0 120px 20px #9fb1ec33;
+      filter: drop-shadow(0 0 10px #c2cff9);
+      z-index:10;
+    }
+
+    /* Névoa sutil */
+    .mist{
+      position:absolute; inset:0; z-index:9;
+      background: radial-gradient(60% 25% at 50% 65%, var(--mist), transparent 70%);
+      mix-blend-mode: screen;
+      pointer-events:none;
+      animation: breathe 12s ease-in-out infinite;
+    }
+    @keyframes breathe { 50% { opacity:.7; transform: translateY(-3px);} }
+
+    /* Camadas de colinas (paralaxe sutil via translateZ + scale) */
+    .layer{ position:absolute; inset:0; transform-style: preserve-3d; }
+
+    .hill{ position:absolute; left:0; right:0; bottom:-8vh; height:48vh; }
+    .hill::before{
+      content:""; position:absolute; inset:0;
+      background: radial-gradient(120% 100% at 50% 100%, var(--c1) 0, var(--c2) 60%, transparent 61%);
+      transform: translateY(0);
+    }
+
+    .h1{ --c1: var(--hill-1); --c2: var(--hill-1); transform: translateZ(-120px) scale(1.08); filter: blur(0.5px); }
+    .h2{ --c1: var(--hill-2); --c2: var(--hill-2); transform: translateZ(-60px) scale(1.04); }
+    .h3{ --c1: var(--hill-3); --c2: var(--hill-3); transform: translateZ(-20px) scale(1.02); }
+
+    /* Grupo de árvores por camada */
+    .trees{ position:absolute; inset:0; bottom:0; }
+
+    /* Árvore básica feita com CSS (canopy em 3 triângulos + tronco) */
+    .tree{ position:absolute; bottom:0; width: var(--w, 18px); height: var(--h, 160px); transform: translateX(var(--x, 0)) scale(var(--s,1)); }
+    .tree .trunk{ position:absolute; bottom:0; left:50%; width: calc(var(--w,18px)*.28); height: calc(var(--h,160px)*.28); background: var(--tree-trunk); transform: translateX(-50%); border-radius: 2px; }
+
+    .tree .canopy{ position:absolute; bottom: calc(var(--h,160px)*.28); left:50%; transform: translateX(-50%); width: calc(var(--w,18px)*2.2); height: calc(var(--h,160px)*.65); }
+    .tree .canopy::before,
+    .tree .canopy::after{ content:""; position:absolute; left:50%; transform: translateX(-50%); width:100%; height:40%; background: linear-gradient(to bottom, var(--canopy-top, var(--tree-canopy-1)), var(--tree-canopy-2)); clip-path: polygon(50% 0, 0 100%, 100% 100%); filter: drop-shadow(0 2px 0 #0002); }
+    .tree .canopy::before{ top:0; }
+    .tree .canopy::after{ top:28%; width:88%; }
+    .tree .leaf{ position:absolute; left:50%; transform: translateX(-50%); bottom: calc(var(--h,160px)*.28 + 46%); width:75%; height:34%; background: linear-gradient(to bottom, var(--canopy-top, var(--tree-canopy-1)), var(--tree-canopy-2)); clip-path: polygon(50% 0, 0 100%, 100% 100%); }
+
+    /* Variação suave ao passar o mouse (efeito sutil para demo) */
+    .tree{ transition: transform .3s ease; }
+    .tree:hover{ transform: translateX(var(--x,0)) scale(calc(var(--s,1)*1.04)); }
+
+    /* Vaga-lumes (só pra dar vida) */
+    .firefly{ position:absolute; width:6px; height:6px; border-radius:50%; background: var(--firefly); box-shadow: 0 0 10px 4px var(--firefly);
+      animation: drift 7s ease-in-out infinite, blink 1.8s ease-in-out infinite;
+      opacity:.85; mix-blend-mode: screen; }
+    @keyframes drift {
+      0%{ transform: translate(0,0); }
+      50%{ transform: translate(20px, -10px); }
+      100%{ transform: translate(0,0); }
+    }
+    @keyframes blink { 50%{ opacity:.2; box-shadow: 0 0 4px 1px var(--firefly); } }
+
+    /* Caixa de texto e HUD estilo RPG de texto */
+    .hud{
+      position:absolute; left:50%; bottom:24px; transform: translateX(-50%);
+      width:min(860px, 92vw);
+      padding:18px 20px; border-radius:16px;
+      background: linear-gradient(180deg, #07111fdd, #05101ccc);
+      backdrop-filter: blur(4px);
+      box-shadow: 0 10px 30px #0007, inset 0 0 0 1px #ffffff12;
+      color:#e8f1ff; line-height:1.6; font-size:clamp(14px, 1.1vw, 16px);
+    }
+    .choices{ margin-top:12px; display:flex; flex-wrap:wrap; gap:10px; }
+    .btn{ padding:10px 14px; border-radius:10px; border:1px solid #ffffff22; cursor:pointer; user-select:none; text-decoration:none; color:#e8f1ff; background:#ffffff0f; transition: .2s ease; }
+    .btn:hover{ background:#ffffff1a; transform: translateY(-1px); }
